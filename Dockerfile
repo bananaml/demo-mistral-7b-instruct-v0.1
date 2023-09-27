@@ -9,6 +9,15 @@ RUN apt-get update && apt-get install -y git wget
 # Upgrade pip
 RUN pip install --upgrade pip
 
+# Clone the transformers repository
+RUN git clone https://github.com/huggingface/transformers.git
+
+# Change to the transformers directory and install it
+WORKDIR transformers
+RUN pip install -e .
+
+WORKDIR /
+
 ADD requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
